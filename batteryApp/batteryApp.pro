@@ -10,7 +10,7 @@ HEADERS += $$_PRO_FILE_PWD_/inc/*.h
 SOURCES += $$_PRO_FILE_PWD_/src/*.cpp
 
 # Include paths
-INCLUDEPATH += $$_PRO_FILE_PWD_/inc \
+INCLUDEPATH += $$_PRO_FILE_PWD_/inc
 
 # Compiler flags
 include($$_PRO_FILE_PWD_/../qmakeUtils/applicationcommon.pri)
