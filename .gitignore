@@ -1,0 +1,19 @@
+# IDE generated files
+*.txt.user
+*.pro.user
+
+# Object files
+*.o
+
+# Merge leftovers
+*.orig
+*.remote
+
+# Temporary files
+*~
+*.autosave
+*.*.autosave
+
+# Python compiled files
+*.pyc
+
