@@ -17,3 +17,6 @@
 # Python compiled files
 *.pyc
 
+# StarUML temp files
+*.~ml
+
