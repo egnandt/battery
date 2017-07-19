@@ -10,10 +10,4 @@ public:
     virtual boolean startLoad() = 0;
 };
 
-class CSVLoader : public ICSVLoader
-{
-public:
-    boolean startLoad(Model m, QFile file);
-};
-
 #endif // ICSVLOADER_H
