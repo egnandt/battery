@@ -1,5 +1,18 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
+        <file>qml/Instruments/ClusterInstruments.qml</file>
+        <file>qml/Plot/Plot.qml</file>
+        <file>qml/Instruments/CentralGaugeStyle.qml</file>
+        <file>img/drive_light.png</file>
+        <file>img/light.png</file>
+        <file>img/turn_left.png</file>
+        <file>img/turn_right.png</file>
+        <file>img/charge.png</file>
+        <file>img/fog_front.png</file>
+        <file>img/fog_rear.png</file>
+        <file>img/abs.png</file>
+        <file>img/airbag.png</file>
+        <file>img/engine.png</file>
     </qresource>
 </RCC>

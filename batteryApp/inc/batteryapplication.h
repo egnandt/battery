@@ -5,6 +5,8 @@
 #include <memory>
 
 class QQuickView;
+class AbstractInstrumentsModel;
+class AbstractBatteryApplicationFactory;
 
 /**
  * @brief The BatteryApplication class
@@ -17,7 +19,7 @@ public:
      * @brief Constructor
      * @param installRoot - a const QString& argument, the path to the application binary folder
      */
-    explicit BatteryApplication(const QString& installRoot);
+    explicit BatteryApplication(std::unique_ptr<AbstractBatteryApplicationFactory> aFactory, const QString& installRoot);
 
     /**
      * @brief Destructor
@@ -61,9 +63,19 @@ private:
     QString m_installRoot;
 
     /**
+     * @brief an AbstractBatteryApplicationFactory member, the application factory
+     */
+    std::unique_ptr<AbstractBatteryApplicationFactory> m_factory;
+
+    /**
      * @brief a QQuickView member, the QML viewer
      */
     std::unique_ptr<QQuickView> m_qmlViewer;
+
+    /**
+     * @brief an AbstractInstrumentsModel member, the instruments viewmodel
+     */
+    std::unique_ptr<AbstractInstrumentsModel> m_instrumentsModel;
 };
 
 #endif // BATTERYAPPLICATION_H

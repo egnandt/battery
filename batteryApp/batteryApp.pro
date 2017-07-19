@@ -4,13 +4,16 @@ TEMPLATE = app
 RESOURCES = $$_PRO_FILE_PWD_/../*.qrc
 
 # Header files
-HEADERS += $$_PRO_FILE_PWD_/inc/*.h
+HEADERS += $$_PRO_FILE_PWD_/inc/*.h \
+           $$_PRO_FILE_PWD_/inc/viewModels/*.h
 
 # Source files
-SOURCES += $$_PRO_FILE_PWD_/src/*.cpp
+SOURCES += $$_PRO_FILE_PWD_/src/*.cpp \
+           $$_PRO_FILE_PWD_/src/viewModels/*.cpp
 
 # Include paths
-INCLUDEPATH += $$_PRO_FILE_PWD_/inc
+INCLUDEPATH += $$_PRO_FILE_PWD_/inc \
+               $$_PRO_FILE_PWD_/inc/viewModels
 
 # Compiler flags
 include($$_PRO_FILE_PWD_/../qmakeUtils/applicationcommon.pri)
