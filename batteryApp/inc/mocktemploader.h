@@ -1,0 +1,5 @@
+#ifndef MOCKTEMPLOADER_H
+#define MOCKTEMPLOADER_H
+
+
+#endif // MOCKTEMPLOADER_H
