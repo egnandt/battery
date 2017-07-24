@@ -5,11 +5,14 @@ RESOURCES = $$_PRO_FILE_PWD_/../*.qrc
 
 # Header files
 HEADERS += $$_PRO_FILE_PWD_/inc/*.h \
-           $$_PRO_FILE_PWD_/inc/viewModels/*.h
+           $$_PRO_FILE_PWD_/inc/viewModels/*.h \
+           $$_PRO_FILE_PWD_/inc/Engine/*.h \
+           $$_PRO_FILE_PWD_/inc/Model/*.h
 
 # Source files
 SOURCES += $$_PRO_FILE_PWD_/src/*.cpp \
-           $$_PRO_FILE_PWD_/src/viewModels/*.cpp
+           $$_PRO_FILE_PWD_/src/viewModels/*.cpp \
+           $$_PRO_FILE_PWD_/src/Engine/*.cpp
 
 # Include paths
 INCLUDEPATH += $$_PRO_FILE_PWD_/inc \
