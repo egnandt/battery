@@ -2,18 +2,21 @@
 #define ABSTRACTTEMPERATURELOADER_H
 
 #include <QObject>
-#include "coordinates.h"
 
 class AbstractTemperatureLoader : public QObject
 {
     Q_OBJECT
 public:
 
+    virtual ~AbstractTemperatureLoader() = 0;
     /**
      * @brief startLoad
      * @return
      */
-    virtual float startLoad(t_Coordinates) = 0;
+    virtual void startLoad() = 0;
+
+public slots:
+    //virtual void taskFinished() = 0;
 };
 
 #endif // ABSTRACTTEMPERATURELOADER_H

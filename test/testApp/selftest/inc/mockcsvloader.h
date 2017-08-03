@@ -1,6 +1,6 @@
 #ifndef MOCKCSVLOADER_H
 #define MOCKCSVLOADER_H
-#include "icsvloader.h"
+#include "abstractcsvloader.h"
 #include <memory>
 
 class MockCSVLoader : public ICSVLoader

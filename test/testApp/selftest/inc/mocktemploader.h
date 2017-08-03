@@ -1,6 +1,6 @@
 #ifndef MOCKTEMPLOADER_H
 #define MOCKTEMPLOADER_H
-#include "abstracttemploader.h"
+#include "abstracttemperatureloader.h"
 #include <memory>
 
 class MockTempLoader : public ITempLoader

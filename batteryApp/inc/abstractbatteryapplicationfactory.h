@@ -2,8 +2,7 @@
 #define ABSTRACTBATTERYAPPLICATIONFACTORY_H
 
 #include <memory>
-
-class AbstractInstrumentsModel;
+#include <batteryapplication.h>
 
 class AbstractBatteryApplicationFactory
 {
@@ -14,11 +13,6 @@ public:
      */
     virtual ~AbstractBatteryApplicationFactory() {}
 
-    /**
-     * @brief Creates instruments model
-     * @return AbstractInstrumentsModel*
-     */
-    virtual std::unique_ptr<AbstractInstrumentsModel> createInstrumentsModel() = 0;
+    virtual std::unique_ptr<BatteryApplication> createApp(const QString& installRoot) = 0;
 };
-
 #endif // ABSTRACTBATTERYAPPLICATIONFACTORY_H

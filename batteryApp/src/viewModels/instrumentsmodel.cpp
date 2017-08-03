@@ -2,18 +2,18 @@
 
 InstrumentsModel::InstrumentsModel(QObject* aParent) :
     AbstractInstrumentsModel(aParent),
-    m_speed(20.0),
-    m_power(5.0),
-    m_turnLeft(false),
-    m_turnRight(false),
-    m_light(false),
+    m_speed(60.0),
+    m_power(70),
+    m_turnLeft(true),
+    m_turnRight(true),
+    m_light(true),
     m_driveLight(false),
-    m_fogFront(false),
+    m_fogFront(true),
     m_fogRear(false),
-    m_charge(false),
-    m_airbag(false),
+    m_charge(true),
+    m_airbag(true),
     m_engine(false),
-    m_abs(false)
+    m_abs(true)
 {
 
 }

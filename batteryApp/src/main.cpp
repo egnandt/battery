@@ -4,12 +4,16 @@
 
 #include "batteryapplication.h"
 #include "batteryapplicationfactory.h"
+#include "temperatureloader.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    BatteryApplication battApp(std::make_unique<BatteryApplicationFactory>(), QDir::cleanPath(QCoreApplication::applicationDirPath()));
-    battApp.initialize();
+    //TemperatureLoader test;
+    //test.startLoad({{45, 54}, {43, 54}});
+    BatteryApplicationFactory battAppFact;
+    std::unique_ptr<BatteryApplication> application = battAppFact.createApp(QDir::cleanPath(QCoreApplication::applicationDirPath()));
+    application->initialize();
     return app.exec();
 }

@@ -1,6 +1,6 @@
 #ifndef MOCKCSVLOADERFACTORY_H
 #define MOCKCSVLOADERFACTORY_H
-#include "icsvloaderfactory.h"
+#include "abstractcsvloaderfactory.h"
 
 /**
  * @brief The concrete MockCSVLoaderFactory class used for gmock/gtest
