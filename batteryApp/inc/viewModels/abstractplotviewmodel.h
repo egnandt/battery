@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QList>
 #include <QPoint>
+#include <QString>
 
 class AbstractPlotViewModel : public QObject
 {
@@ -14,12 +15,16 @@ class AbstractPlotViewModel : public QObject
     Q_PROPERTY(float maxValueY READ getMaxValueY NOTIFY maxValueYChanged)
     Q_PROPERTY(float minValueX READ getMinValueX NOTIFY minValueXChanged)
     Q_PROPERTY(float maxValueX READ getMaxValueX NOTIFY maxValueXChanged)
-    Q_PROPERTY( QPointF  endOfCharge READ getEndOfCharge NOTIFY endOfChargeChanged)
+    Q_PROPERTY(QPointF  endOfCharge READ getEndOfCharge NOTIFY endOfChargeChanged)
     Q_PROPERTY(bool loading READ getLoading NOTIFY loadingChanged)
+    Q_PROPERTY(QString errorMessage READ getErrorMessage NOTIFY errorMessageChanged)
 
 public:
     explicit AbstractPlotViewModel(QObject* aParent=0);
     virtual ~AbstractPlotViewModel();
+
+    virtual QString getErrorMessage() const= 0;
+    virtual void setErrorMessage (const QString& message) = 0;
 
     virtual QVariantList getTemperaturePoints() const= 0;
     virtual void setTemperaturePoints(const  QVariantList & list) = 0;
@@ -58,6 +63,7 @@ signals:
     void maxValueYChanged();
     void endOfChargeChanged();
     void loadingChanged();
+    void errorMessageChanged();
 };
 #endif // PLOTVIEWMODEL_H
 

@@ -23,7 +23,7 @@ BatteryApplicationFactory::~BatteryApplicationFactory()
 
 std::unique_ptr<BatteryApplication> BatteryApplicationFactory::createApp(const QString& installRoot)
 {
-    std::unique_ptr<AbstractModel> model = std::make_unique<Model>(" ");
+    std::unique_ptr<AbstractModel> model = std::make_unique<Model>(installRoot + "/config.ini");
     std::unique_ptr<CSVLoader> csvLoader = std::make_unique<CSVLoader>(*model.get());
     std::unique_ptr<TemperatureLoader> temperatureLoader = std::make_unique<TemperatureLoader>(*model.get());
     std::unique_ptr<GradientCalculator> gradientCalculator = std::make_unique<GradientCalculator>(*model.get());
@@ -31,7 +31,7 @@ std::unique_ptr<BatteryApplication> BatteryApplicationFactory::createApp(const Q
     std::unique_ptr<InstrumentsModel> instrumentsModel = std::make_unique<InstrumentsModel>();
     std::unique_ptr<PlotViewModel> plotViewModel = std::make_unique<PlotViewModel>();
     std::unique_ptr<UIDrawer> uiDrawer = std::make_unique<UIDrawer>(*model.get(), *plotViewModel.get());
-    std::unique_ptr<Engine> engine = std::make_unique<Engine>(std::move(model), *plotViewModel.get(), *csvLoader.get(), *temperatureLoader.get(),
+    std::unique_ptr<Engine> engine = std::make_unique<Engine>(*plotViewModel.get(), *csvLoader.get(), *temperatureLoader.get(),
                                                               *gradientCalculator.get(), *rangeCalculator.get(), *uiDrawer.get());
     csvLoader->setCallback(engine.get());
     temperatureLoader->setCallback(engine.get());
@@ -41,5 +41,5 @@ std::unique_ptr<BatteryApplication> BatteryApplicationFactory::createApp(const Q
     return std::make_unique<BatteryApplication>(installRoot , std::move(engine), std::move(csvLoader),
                                                 std::move(temperatureLoader), std::move(gradientCalculator),
                                                 std::move(rangeCalculator), std::move(uiDrawer),
-                                                std::move(instrumentsModel), std::move(plotViewModel));
+                                                std::move(instrumentsModel), std::move(plotViewModel), std::move(model));
 }

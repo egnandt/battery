@@ -2,7 +2,7 @@
 #include <QtScript>
 
 TemperatureLoader::TemperatureLoader(AbstractModel &aModel) :
-    m_url{"api.openweathermap.org/data/2.5/weather?"}, m_index{0}, m_model{aModel}
+    m_url{"http://api.openweathermap.org/data/2.5/weather?"}, m_index{0}, m_model{aModel}
 {
     QObject::connect(&m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(responseReceived(QNetworkReply*)));
 }
@@ -14,9 +14,10 @@ void TemperatureLoader::runState()
 
 void TemperatureLoader::startLoad()
 {
+    m_index = 0;
     if(m_model.getDataPointList().length() > m_index) //good condition?
     {
-        m_request = getNetworkRequest(m_index++);
+        m_request = getNetworkRequest(m_index);
         m_currentReply = m_networkManager.get(m_request);  // GET
         qDebug()<<"Http request sent";
     }
@@ -26,17 +27,31 @@ void TemperatureLoader::startLoad()
     }
 }
 
-QList <float> TemperatureLoader::getListOfTemperatureValues()
-{
-    return m_listOfTemperatureValues;
-}
-
 void TemperatureLoader::responseReceived(QNetworkReply *reply)
 {
     if (reply->error() != QNetworkReply::NoError)
     {
         qDebug()<<"Error with HTTP request";
-        return;
+        //If there is any error with the web api call, fallback on hard-coded values from CSV
+        //must have hardcoded values for temperature i
+        if(m_model.getDataPointList().at(m_index).m_temperature != -10000)
+        {
+            //Http request error
+            //m_stateCallback->errorOccured(Errors::NoWebServiceTemperatureValuesError);
+            m_model.setTemperatureValue(m_model.getDataPointList().at(m_index).m_temperature);
+        }
+        else
+        {
+            m_stateCallback->errorOccured(Errors::NoTemperatureValuesError);
+        }
+    }
+    else
+    {
+        QString data = (QString) reply->readAll(); //Parse JSON to a QString
+
+        QScriptEngine engine;
+        QScriptValue result = engine.evaluate(data);
+        m_model.setTemperatureValue(((float)result.property("main").property("temp").toNumber())-272.15); //taking the needed fields, convert to celsius
     }
     qDebug()<<"JSON received ";
 
@@ -45,10 +60,7 @@ void TemperatureLoader::responseReceived(QNetworkReply *reply)
     with Qt4
     */
 
-    QString data = (QString) reply->readAll(); //Parse JSON to a QString
 
-    QScriptEngine engine;
-    QScriptValue result = engine.evaluate(data);
 
     /*
     Weather Service API response in JSON looks like this:
@@ -64,15 +76,15 @@ void TemperatureLoader::responseReceived(QNetworkReply *reply)
     "cod":200}
     */
 
-    m_listOfTemperatureValues.append((float)result.property("main").property("temp").toNumber()); //taking the needed fields
+
+    ++m_index;
     if(m_model.getDataPointList().length() > m_index) //good condition?
     {
-        m_currentReply = m_networkManager.get(getNetworkRequest(m_index++));  // GET
+        m_currentReply = m_networkManager.get(getNetworkRequest(m_index));  // GET
         qDebug()<<"Http request sent";
     }
     else
     {
-
         m_stateCallback->stateFinished();
     }
 }
@@ -89,5 +101,6 @@ QNetworkRequest TemperatureLoader::getNetworkRequest(int index)
     m_request.setUrl(m_url);
     m_urlParameters.clear(); //clear the url parameters
     m_query.clear(); //clear the query
+
     return m_request;
 }

@@ -11,4 +11,5 @@ public:
 protected:
     IStateCallback *m_stateCallback;
 };
+
 #endif // BASESTATE_H

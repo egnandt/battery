@@ -16,6 +16,14 @@ public:
 
     void startDraw();
 
+    float maxValueFromList(const QList<float> &list);
+
+    float minValueFromList(const QList<float> &list);
+
+    float minValueFromAllLists(float nr1, float nr2, float nr3);
+
+    float maxValueFromAllLists(float nr1, float nr2, float nr3);
+
 protected:
     AbstractModel& m_model;
     AbstractPlotViewModel& m_plotViewModel;

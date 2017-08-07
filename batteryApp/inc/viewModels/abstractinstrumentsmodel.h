@@ -8,7 +8,7 @@ class AbstractInstrumentsModel: public QObject
     Q_OBJECT
     Q_PROPERTY(double speed READ speed NOTIFY speedChanged)
     Q_PROPERTY(double power READ power NOTIFY powerChanged)
-    Q_PROPERTY(bool turnLefQ_OBJECTt READ turnLeft NOTIFY turnLeftChanged)
+    Q_PROPERTY(bool turnLeft READ turnLeft NOTIFY turnLeftChanged)
     Q_PROPERTY(bool turnRight READ turnRight NOTIFY turnRightChanged)
     Q_PROPERTY(bool light READ light NOTIFY lightChanged)
     Q_PROPERTY(bool driveLight READ driveLight NOTIFY driveLightChanged)

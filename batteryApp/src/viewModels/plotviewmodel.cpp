@@ -10,7 +10,8 @@ PlotViewModel::PlotViewModel(QObject* aParent)
       m_maxValueY {0},
       m_minValueX {0},
       m_maxValueX {0},
-      m_loading {true}
+      m_loading {true},
+      m_message {" "}
 {
 
 }
@@ -18,6 +19,17 @@ PlotViewModel::PlotViewModel(QObject* aParent)
 PlotViewModel::~PlotViewModel()
 {
 
+}
+
+QString PlotViewModel::getErrorMessage() const
+{
+    return m_message;
+}
+
+void PlotViewModel::setErrorMessage(const QString &message)
+{
+    m_message=message;
+    emit errorMessageChanged();
 }
 
 QVariantList PlotViewModel::getTemperaturePoints() const

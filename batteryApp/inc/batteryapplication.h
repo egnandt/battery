@@ -16,6 +16,7 @@ class AbstractGradientCalculator;
 class AbstractUIDrawer;
 class AbstractInstrumentsModel;
 class AbstractPlotViewModel;
+class AbstractModel;
 
 /**
  * @brief The BatteryApplication class
@@ -35,7 +36,8 @@ public:
                                 std::unique_ptr<AbstractRangeCalculator> rangeCalculator,
                                 std::unique_ptr<AbstractUIDrawer> uiDrawer,
                                 std::unique_ptr<AbstractInstrumentsModel> instrumentsModel,
-                                std::unique_ptr<AbstractPlotViewModel> plotViewModel);
+                                std::unique_ptr<AbstractPlotViewModel> plotViewModel,
+                                std::unique_ptr<AbstractModel> model);
 
     /**
      * @brief Destructor
@@ -95,6 +97,8 @@ private:
     std::unique_ptr<AbstractInstrumentsModel> m_instrumentsModel;
 
     std::unique_ptr<AbstractPlotViewModel> m_plotViewModel;
+
+    std::unique_ptr<AbstractModel> m_model;
 
     /**
      * @brief a QQuickView member, the QML viewer

@@ -11,6 +11,10 @@ public:
     ~PlotViewModel();
 
 public:
+
+    QString getErrorMessage() const;
+    void setErrorMessage(const QString & message);
+
     QVariantList getTemperaturePoints() const;
     void setTemperaturePoints(const  QVariantList & list);
 
@@ -48,5 +52,6 @@ private:
     float m_minValueX;
     float m_maxValueX;
     bool m_loading;
+    QString m_message;
 };
 #endif // PLOTVIEW_H

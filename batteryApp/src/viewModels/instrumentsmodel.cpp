@@ -7,15 +7,18 @@ InstrumentsModel::InstrumentsModel(QObject* aParent) :
     m_turnLeft(true),
     m_turnRight(true),
     m_light(true),
-    m_driveLight(false),
+    m_driveLight(true),
     m_fogFront(true),
-    m_fogRear(false),
+    m_fogRear(true),
     m_charge(true),
     m_airbag(true),
-    m_engine(false),
+    m_engine(true),
     m_abs(true)
 {
-
+    QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(onTimerElapsed()), Qt::UniqueConnection);
+    m_timer.setInterval(10000);
+    m_timer.setSingleShot(false);
+    m_timer.start();
 }
 
 InstrumentsModel::~InstrumentsModel()
@@ -153,4 +156,10 @@ void InstrumentsModel::setAbs(bool value)
 {
     m_abs = value;
     emit absChanged();
+}
+
+void InstrumentsModel::onTimerElapsed()
+{
+    setSpeed(qrand() % 150);
+    setPower(qrand() % 100);
 }

@@ -13,8 +13,9 @@ void GradientCalculator::runState()
     m_stateCallback->stateFinished();
 }
 
-//dummy implementation for the moment
 void GradientCalculator::startCalculating()
 {
-
+    m_model.setGradientPoint(0);
+    for(int index = 0; index < m_model.getDataPointList().length() - 1; index++)
+        m_model.setGradientPoint((m_model.getDataPointList().at(index + 1).m_elevation-m_model.getDataPointList().at(index).m_elevation)/10);
 }

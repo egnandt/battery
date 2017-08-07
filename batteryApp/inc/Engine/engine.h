@@ -2,7 +2,6 @@
 #define ENGINE_H
 #include "istatecallback.h"
 #include "istate.h"
-#include "abstractmodel.h"
 #include "abstractplotviewmodel.h"
 #include <memory>
 
@@ -20,17 +19,16 @@ class Engine : public IStateCallback
 {
 public:
 
-    Engine(std::unique_ptr<AbstractModel> model, AbstractPlotViewModel &plotViewModel,
+    Engine(AbstractPlotViewModel &plotViewModel,
            IState &csvLoader, IState &tempLoader, IState &gradCalc, IState &rangeCalc, IState &uiDrawer);
 
     void stateFinished();
 
-    void errorOccured();
+    void errorOccured(Errors currentError);
 
     void run();
 
 private:
-    std::unique_ptr<AbstractModel> m_model;
     AbstractPlotViewModel& m_plotViewModel;
     IState& m_csvLoader;
     IState& m_tempLoader;

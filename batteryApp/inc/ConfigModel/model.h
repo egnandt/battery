@@ -32,8 +32,8 @@ public:
     void setStateOfCharge(const float);
     QList<float> &getGradientPoints();
     void setGradientPoint(const float);
-    QList<float> &getTemperatureValuesFromWeb();
-    void setTemperatureValuesFromWeb(const QList<float>&);
+    QList<float> &getTemperatureValuesList();
+    void setTemperatureValue(const float);
 
 private:
 
@@ -44,7 +44,7 @@ protected:
     QList<DataPoint> m_dataPointList;
     QList<float> m_statesOfCharge;
     QList<float> m_gradientPoints;
-    QList<float> m_temperatureValuesFromWeb;
+    QList<float> m_temperatureValuesList;
 
 };
 #endif // CONFIGLOADER_H

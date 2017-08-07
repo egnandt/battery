@@ -19,12 +19,13 @@ void CSVLoader::startLoad()
 {
     QStringList wordList;
     QList<DataPoint> dataPointList;
+    qDebug() << m_path;
     QFile mFile(m_path);
     DataPoint dataPoint;
     if (!mFile.open(QFile::ReadOnly | QFile::Text))
     {
-        qDebug() << "The file can't be open!";
-        return;
+        qDebug() << "The file can't be opened!";
+        m_stateCallback->errorOccured(Errors::FileCorruptedError);
     }
 
     QTextStream in(&mFile);
@@ -36,8 +37,16 @@ void CSVLoader::startLoad()
         dataPoint.m_coordinates.setX(wordList.at(0).toFloat());
         dataPoint.m_coordinates.setY(wordList.at(1).toFloat());
         dataPoint.m_elevation = wordList.at(2).toFloat();
-        dataPoint.m_temperature = wordList.at(3).toFloat();
+        if (wordList.count()==4)
+        {
+            dataPoint.m_temperature = wordList.at(3).toFloat();
+        }
+        else
+        {
+            dataPoint.m_temperature = -10000;
+        }
         dataPointList.append(dataPoint);
+
     }
     m_model.setDataPointList(dataPointList);
 }

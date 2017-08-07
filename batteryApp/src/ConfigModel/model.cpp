@@ -103,12 +103,12 @@ void Model::setGradientPoint(const float value)
     m_gradientPoints.append(value);
 }
 
-QList<float>& Model::getTemperatureValuesFromWeb()
+QList<float>& Model::getTemperatureValuesList()
 {
-    return m_temperatureValuesFromWeb;
+    return m_temperatureValuesList;
 }
 
-void Model::setTemperatureValuesFromWeb(const QList<float>& list)
+void Model::setTemperatureValue(const float value)
 {
-    m_temperatureValuesFromWeb = list;
+    m_temperatureValuesList.append(value);
 }

@@ -2,7 +2,7 @@
 #include <QQmlContext>
 #include <QDir>
 #include <iostream>
-
+#include <QUrl>
 #include "batteryapplication.h"
 #include "abstractbatteryapplicationfactory.h"
 #include "abstractinstrumentsmodel.h"
@@ -12,6 +12,7 @@
 #include "abstractgradientcalculator.h"
 #include "abstractuidrawer.h"
 #include "abstractplotviewmodel.h"
+#include "abstractmodel.h"
 #include "engine.h"
 #include <memory>
 
@@ -23,7 +24,8 @@ BatteryApplication::BatteryApplication(const QString& installRoot,
                                        std::unique_ptr<AbstractRangeCalculator> rangeCalculator,
                                        std::unique_ptr<AbstractUIDrawer> uiDrawer,
                                        std::unique_ptr<AbstractInstrumentsModel> instrumentsModel,
-                                       std::unique_ptr<AbstractPlotViewModel> plotViewModel) :
+                                       std::unique_ptr<AbstractPlotViewModel> plotViewModel,
+                                       std::unique_ptr<AbstractModel> model) :
     m_installRoot(installRoot),
     m_engine(std::move(engine)),
     m_CSVLoader(std::move(csvLoader)),
@@ -33,6 +35,7 @@ BatteryApplication::BatteryApplication(const QString& installRoot,
     m_uiDrawer(std::move(uiDrawer)),
     m_instrumentsModel(std::move(instrumentsModel)),
     m_plotViewModel(std::move(plotViewModel)),
+    m_model(std::move(model)),
     m_qmlViewer(nullptr)
 {
 
@@ -45,8 +48,6 @@ BatteryApplication::~BatteryApplication()
 
 bool BatteryApplication::initialize()
 {
-    cleanup();
-
     bool ret = true;
 
     // Register custom QML types (creatable and uncreatable)
@@ -67,6 +68,7 @@ bool BatteryApplication::initialize()
     {
         m_qmlViewer->show();
     }
+    m_CSVLoader->setPath(QDir::cleanPath(m_model->getRoutePath()));
     m_engine->run();
     return ret;
 }

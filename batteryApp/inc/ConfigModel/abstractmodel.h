@@ -26,7 +26,7 @@ public:
     virtual void setStateOfCharge(const float) = 0;
     virtual QList<float> &getGradientPoints() = 0;
     virtual void setGradientPoint(const float) = 0;
-    virtual QList<float> &getTemperatureValuesFromWeb() = 0;
-    virtual void setTemperatureValuesFromWeb(const QList<float>&) = 0;
+    virtual QList<float> &getTemperatureValuesList() = 0;
+    virtual void setTemperatureValue(const float) = 0;
 };
 #endif // ABSTRACTMODEL_H

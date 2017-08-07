@@ -1,6 +1,7 @@
 #ifndef INSTRUMENTSMODEL_H
 #define INSTRUMENTSMODEL_H
 
+#include <QTimer>
 #include "abstractinstrumentsmodel.h"
 
 class InstrumentsModel: public AbstractInstrumentsModel
@@ -108,7 +109,16 @@ private:
      */
     void setAbs(bool value);
 
+private slots:
+
+    void onTimerElapsed();
+
 private:
+
+    /**
+     * @brief Timer member
+     */
+    QTimer m_timer;
 
     /**
      * @brief The current speed

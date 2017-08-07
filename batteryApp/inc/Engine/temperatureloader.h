@@ -29,12 +29,6 @@ public: //From AbstractTemperatureLoader
     void startLoad();
 
     /**
-     * @brief Getter for the temperature values
-     * @return
-     */
-    QList<float> getListOfTemperatureValues();
-
-    /**
      * @brief getNetworkRequest
      * @param index
      * @return The request
@@ -48,7 +42,6 @@ public slots:
     void responseReceived(QNetworkReply *reply);
 
 private:
-    QList<float> m_listOfTemperatureValues;
     QNetworkAccessManager m_networkManager;
     QNetworkReply *m_currentReply;
     QNetworkRequest m_request;
